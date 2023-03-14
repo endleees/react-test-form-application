@@ -2,15 +2,20 @@ import React, {useState} from "react";
 import ReactInputMask from 'react-input-mask';
 
 interface FormState {
-    phoneNumber: string;
+    phone: string;
     name: string;
     message: string;
+    phoneError: string;
+    nameError: string;
+    messageError: string;
+    formError: string;
+    formSuccess: string;
 }
 
 export const FeedbackModal = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [formStatus,setFormStatus] = useState('')
-    const [formState, setFormState] = useState({
+    const [formState, setFormState] = useState<FormState>({
         phone: "",
         name: "",
         message: "",
@@ -28,25 +33,14 @@ export const FeedbackModal = () => {
         setIsOpen(false);
     };
     const formatPhoneNumber = (phoneNumber: string) => {
-        console.log(phoneNumber)
         phoneNumber = phoneNumber.replace(/\D/g, "");
-        // добавляем +7 и разделители
 
-        const newPhoneValue = `+7 (${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 8)}-${phoneNumber.slice(8, 10)}`;
-        return newPhoneValue;
-        // const cleaned = phoneNumber.replace(/\D/g, '');
-        // const match = cleaned.match(/^(\d{3})(\d{3})(\d{2})(\d{2})$/);
-        //
-        // if (match) {
-        //     return `+7 (${match[1]}) ${match[2]}-${match[3]}-${match[4]}`;
-        // }
-        // return phoneNumber;
+        return `+7 (${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 8)}-${phoneNumber.slice(8, 10)}`;
     };
     const validatePhoneNumber = () => {
         const { phone }= formState;
         const cleaned = phone.replace(/\D/g, '');
         return cleaned.length === 11;
-
     };
     const handlePhoneNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setFormState((prevState) => ({
@@ -130,8 +124,6 @@ export const FeedbackModal = () => {
         }
         return null;
     };
-
-
 
     return (
         <>

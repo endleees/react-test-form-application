@@ -74,7 +74,7 @@
   cursor: pointer;
 }
 
-.modal__content button:hover {
+.modal__content button:hover,.modal-button-open:hover {
   background-color: #d32f2f;
 }
 .modal-button-open {
