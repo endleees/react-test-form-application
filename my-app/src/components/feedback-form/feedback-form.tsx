@@ -135,7 +135,7 @@ export const FeedbackModal = () => {
 
     return (
         <>
-            <button onClick={handleOpenModal}>Открыть форму обратной связи</button>
+            <button className={'modal-button-open'} onClick={handleOpenModal}>Открыть форму обратной связи</button>
             {isOpen && (
                 <div className="modal">
                     <div className="modal__content">
